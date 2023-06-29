@@ -1,0 +1,65 @@
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Calendar #04</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content w-100">
+                    <div class="calendar-container">
+                        <div class="calendar">
+                            <div class="year-header">
+
+                                <fa-icon (click)="prev_year()" [icon]="faChevronLeft" class="left-button"
+                                    id="prev"></fa-icon>
+
+                                <span class="year" id="label">{{this.actualYear}}</span>
+
+
+                                <fa-icon (click)="next_year()" [icon]="faChevronRight" class="right-button"
+                                    id="prev"></fa-icon>
+                            </div>
+                            <table class="months-table w-100">
+                                <tbody>
+
+
+                                </tbody>
+                            </table>
+
+                            <table class="days-table w-100">
+                                <td *ngFor="let day of days">{{day.slice(0, 3)}}</td>
+
+                            </table>
+                            <div class="frame">
+                                <table class="dates-table w-100">
+                                    <tbody class="tbody" appDaysCalendar [date]="this.date" [months]="this.months">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="button" id="add-button">Add Event</button>
+                        </div>
+                    </div>
+                    <div class="events-container">
+                    </div>
+                    <div class="dialog" id="dialog">
+                        <h2 class="dialog-header"> Add New Event </h2>
+                        <form class="form" id="form">
+                            <div class="form-container" align="center">
+                                <label class="form-label" id="valueFromMyButton" for="name">Event name</label>
+                                <input class="input" type="text" id="name" maxlength="36">
+                                <label class="form-label" id="valueFromMyButton" for="count">Number of people to
+                                    invite</label>
+                                <input class="input" type="number" id="count" min="0" max="1000000" maxlength="7">
+                                <input type="button" value="Cancel" class="button" id="cancel-button">
+                                <input type="button" value="OK" class="button button-white" id="ok-button">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

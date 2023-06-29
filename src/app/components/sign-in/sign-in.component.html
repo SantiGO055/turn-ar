@@ -1,0 +1,7 @@
+<button *ngIf="!this.user" (click)="signIn()" type="button" class="btn btn-primary">Log In</button>
+<button *ngIf="this.user" (click)="signOut()" type="button" class="btn btn-primary">Log out</button>
+
+<p *ngIf="this.user">
+    {{this.user.displayName}}
+
+</p>

@@ -14,6 +14,7 @@ export class DaysCalendarDirective {
     var row = this.renderer.createElement("tr");
     this.renderer.addClass(row, "table-row")
 
+
     var month = date.getMonth();
     var year = date.getFullYear();
     var day_count = this.days_in_month(month, year);
@@ -24,6 +25,7 @@ export class DaysCalendarDirective {
     var first_day = date.getDay();
     // 35+firstDay is the number of date elements to be added to the dates table
     // 35 is from (7 days in a week) * (up to 5 rows of dates in a month)
+
     for (var i = 0; i < 35 + first_day; i++) {
       // Since some of the elements will be blank, 
       // need to calculate actual date from index
@@ -32,7 +34,7 @@ export class DaysCalendarDirective {
       if (i % 7 === 0) {
         this.renderer.appendChild(this.el.nativeElement, row)
         // this.calendar_days?.nativeElement.append(row);
-        row = this.renderer.createElement("tr");
+
         this.renderer.addClass(row, "table-row")
       }
       // if current index isn't a day in this month, make it blank
@@ -40,13 +42,16 @@ export class DaysCalendarDirective {
         var curr_date = this.renderer.createElement("td");
         this.renderer.addClass(row, "table-date")
         this.renderer.addClass(row, "nil")
-        this.renderer.appendChild(row.nativeElement, curr_date)
+        this.renderer.appendChild(row, curr_date)
+        // console.log(row)
+        console.log(day.toString())
       }
       else {
         var curr_date = this.renderer.createElement("td"); // creo td
         this.renderer.addClass(curr_date, "table-date") // le doy clase
         var dayEl = this.renderer.createElement("p"); //creo el elemento que va dentro de 
         this.renderer.setValue(dayEl, day.toString()); // le asigno el dia al p dentro del td
+        console.log(day.toString())
         this.renderer.appendChild(curr_date, dayEl)
         // $("<td class='table-date'>" + day + "</td>");
         var events = this.check_events(day, month + 1, year);
@@ -62,7 +67,9 @@ export class DaysCalendarDirective {
         }
         // // Set onClick handler for clicking a date
         curr_date.click({ events: events, month: this.months[month], day: day }, this.date_click);
-        row.append(curr_date);
+        this.renderer.appendChild(row, curr_date)
+        console.log(row)
+        // row.append(curr_date);
       }
     }
     // Append the last row and set the current year
@@ -93,6 +100,9 @@ export class DaysCalendarDirective {
   days_in_month(month: number, year: number) {
     var monthStart = new Date(year, month, 1);
     var monthEnd = new Date(year, month + 1, 1);
+    console.log(monthEnd.getMonth())
+    console.log(monthStart.getMonth())
+    console.log((monthEnd.getMonth() - monthStart.getMonth()) / (1000 * 60 * 60 * 24))
     return (monthEnd.getMonth() - monthStart.getMonth()) / (1000 * 60 * 60 * 24);
   }
 
